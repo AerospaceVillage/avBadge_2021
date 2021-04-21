@@ -1,0 +1,7 @@
+(fp_lib_table
+  (lib (name sunled)(type KiCad)(uri /home/dan/Documents/Personal/aerospace/avBadge_2021/kicad/libraries/sunled.pretty)(options "")(descr ""))
+  (lib (name digikey-footprints)(type KiCad)(uri /home/dan/Documents/Programming/digikey/digikey-kicad-library/digikey-footprints.pretty)(options "")(descr ""))
+  (lib (name Battery)(type KiCad)(uri /home/dan/Documents/Programming/kicad_libraries/kicad-footprints/Battery.pretty)(options "")(descr ""))
+  (lib (name aerospace_badge)(type KiCad)(uri /home/dan/Documents/Personal/aerospace/avBadge_2021/kicad/libraries/aerospace_badge.pretty)(options "")(descr ""))
+  (lib (name Connector)(type KiCad)(uri /home/dan/Documents/Personal/aerospace/avBadge_2021/kicad/libraries/Connector)(options "")(descr ""))
+)
