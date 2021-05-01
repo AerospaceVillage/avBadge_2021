@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source /home/dan/Documents/Personal/aerospace/avBadge_2021/kicad/avBadge_2021/avBadge_2021.sch)
-    (date "Sun 18 Apr 2021 08:38:17 AM EDT")
+    (date "Mon 26 Apr 2021 08:13:26 PM EDT")
     (tool "Eeschema 5.1.6-c6e7f7d~86~ubuntu18.04.1")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -66,7 +66,7 @@
       (tstamp 607B7AF9))
     (comp (ref Q1)
       (value 2N3904)
-      (footprint TO_SOT_Packages_SMD:SOT-23)
+      (footprint aerospace_badge:SOT-23-NPN)
       (datasheet https://www.fairchildsemi.com/datasheets/2N/2N3904.pdf)
       (libsource (lib Transistor_BJT) (part 2N3904) (description "0.2A Ic, 40V Vce, Small Signal NPN Transistor, TO-92"))
       (sheetpath (names /) (tstamps /))
