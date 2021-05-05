@@ -804,4 +804,15 @@ F 3 "~" H 3650 4800 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	3250 4800 3450 4800
+$Comp
+L MCU_Microchip_ATmega:ATmega8-16AU U2
+U 1 1 608E9FF1
+P 9300 2250
+F 0 "U2" H 9300 3831 50  0000 C CNN
+F 1 "ATmega8-16AU" H 9300 3740 50  0000 C CNN
+F 2 "Package_QFP:TQFP-32_7x7mm_P0.8mm" H 9300 2250 50  0001 C CIN
+F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/atmel-2486-8-bit-avr-microcontroller-atmega8_l_datasheet.pdf" H 9300 2250 50  0001 C CNN
+	1    9300 2250
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC

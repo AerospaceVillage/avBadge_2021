@@ -1,6 +1,5 @@
 
 #include "Arduino.h"
-//#include "SoftwareSerial.h"
 
 #define g_beacon_R 8
 #define g_beacon_G 6  // schematic is wrong on these
@@ -20,7 +19,27 @@ volatile short button_press_count = 0;
 short rwy_intensity[] = {0, 1, 50, 200};
 volatile short rwy_intensity_index = 2;
 
+const int rwy_edge_lights_ON_TIME = 40;
+const int rwy_edge_lights_OFF_TIME = 1800;
+boolean rwy_edge_lights_ON_STATE = true;
+unsigned long previousMillis_rwy_edge_lights = 0;
+
+const int beacon_ON_TIME = 900;
+const int beacon_OFF_TIME = 3000;
+boolean beacon_ON_STATE = true;
+unsigned long previousMillis_beacon = 0;
+boolean beacon_is_green = true;   // false is then percieced as White
+
+const int tower_gun_ON_TIME = 500;
+const int tower_gun_OFF_TIME = 400;
+boolean tower_gun_ON_STATE = true;
+unsigned long previousMillis_tower_gun = 0;
+boolean tower_gun_is_green = true;   // false is then percieced as RED for exercise extreme caution
+boolean tower_light_gun_is_ON = false;
+
+
 void setup() {
+
   
   pinMode(g_beacon_R, OUTPUT);
   pinMode(g_beacon_G, OUTPUT);
@@ -53,46 +72,128 @@ void button_press(){
   
 }
 
+/*
+* Helper function to handle the aysmmetric timing of the runway flashing lights.
+* To create the desired timing the lights are pulsed in a quick burst.
+*/
+void runwayEdgeLight()
+{
+  unsigned long currentMillis = millis();
+
+  if(rwy_edge_lights_ON_STATE){
+    if(currentMillis >= previousMillis_rwy_edge_lights + rwy_edge_lights_ON_TIME){
+        rwy_edge_lights_ON_STATE = !rwy_edge_lights_ON_STATE;
+        previousMillis_rwy_edge_lights = currentMillis;        
+        digitalWrite(g_rwy_flashing, LOW);
+     }
+  }else{
+    if(currentMillis >= previousMillis_rwy_edge_lights + rwy_edge_lights_OFF_TIME){
+      rwy_edge_lights_ON_STATE = !rwy_edge_lights_ON_STATE;
+      previousMillis_rwy_edge_lights = currentMillis;
+      digitalWrite(g_rwy_flashing, HIGH);
+    }
+  }   
+}
+
+/*
+* Helper function to handle the aysmmetric timing of the airfield beacon lights.
+* To create the desired timing the lights are pulsed in a quick burst.
+*/
+void beaconLight()
+{
+  unsigned long currentMillis = millis();
+
+  if(beacon_ON_STATE){
+    if(currentMillis >= previousMillis_beacon + beacon_ON_TIME){
+        beacon_ON_STATE = !beacon_ON_STATE;
+        previousMillis_beacon = currentMillis;
+        digitalWrite(g_beacon_R, HIGH);
+        digitalWrite(g_beacon_G, HIGH);
+        digitalWrite(g_beacon_B, HIGH);        
+     }
+  }else{
+    if(currentMillis >= previousMillis_beacon + beacon_OFF_TIME){
+      beacon_ON_STATE = !beacon_ON_STATE;
+      previousMillis_beacon = currentMillis;
+
+      // need to write the correct color
+      if(beacon_is_green){
+        digitalWrite(g_beacon_R, HIGH);
+        digitalWrite(g_beacon_G, LOW);
+        digitalWrite(g_beacon_B, HIGH);
+        beacon_is_green = !beacon_is_green;
+      }else{
+        // Treat it as a white light
+        digitalWrite(g_beacon_R, LOW);
+        digitalWrite(g_beacon_G, LOW);
+        digitalWrite(g_beacon_B, LOW);
+        beacon_is_green = !beacon_is_green;
+      }      
+      
+    }
+  }   
+}
+
+/*
+* Helper function to handle the timing of the tower light gun.
+* To create the desired timing the lights are pulsed in a quick burst.
+*/
+void towerLightGun()
+{
+  unsigned long currentMillis = millis();
+
+  if(tower_light_gun_is_ON){
+
+    if(tower_gun_ON_STATE){
+      if(currentMillis >= previousMillis_tower_gun + tower_gun_ON_TIME){
+          tower_gun_ON_STATE = !tower_gun_ON_STATE;
+          previousMillis_tower_gun = currentMillis;
+          digitalWrite(g_tower_R, HIGH);
+          digitalWrite(g_tower_G, HIGH);
+          digitalWrite(g_tower_B, HIGH);        
+       }
+    }else{
+      if(currentMillis >= previousMillis_tower_gun + tower_gun_OFF_TIME){
+        tower_gun_ON_STATE = !tower_gun_ON_STATE;
+        previousMillis_tower_gun = currentMillis;
+  
+        // need to write the correct color
+        if(tower_gun_is_green){
+          digitalWrite(g_tower_R, HIGH);
+          digitalWrite(g_tower_G, LOW);
+          digitalWrite(g_tower_B, HIGH);
+          tower_gun_is_green = !tower_gun_is_green;
+        }else{
+          // Treat it as a red light
+          digitalWrite(g_tower_R, LOW);
+          digitalWrite(g_tower_G, HIGH);
+          digitalWrite(g_tower_B, HIGH);
+          tower_gun_is_green = !tower_gun_is_green;
+        }      
+        
+      }
+    }
+  }else{
+    //The light gun is OFF, just show normal yellow
+    digitalWrite(g_tower_R, LOW);
+    digitalWrite(g_tower_G, LOW);
+    digitalWrite(g_tower_B, HIGH);
+  }
+}
+
 void loop() {
   // put your main code here, to run repeatedly:
 
   analogWrite(g_rwy, rwy_intensity[rwy_intensity_index]);
-  digitalWrite(g_rwy_flashing, HIGH);
 
-  
-  
-  digitalWrite(g_beacon_R, HIGH);
-  digitalWrite(g_beacon_G, LOW);
-  digitalWrite(g_beacon_B, HIGH);
-  
-  digitalWrite(g_tower_R, LOW);
-  digitalWrite(g_tower_G, HIGH);
-  digitalWrite(g_tower_B, HIGH);
+  runwayEdgeLight();
+  beaconLight();
+  towerLightGun();
 
-
-
-  delay(15);
-  digitalWrite(g_rwy_flashing, LOW);
-
-  delay(600);
-  digitalWrite(g_beacon_R, LOW);
-  digitalWrite(g_beacon_G, LOW);
-  digitalWrite(g_beacon_B, LOW);
-
-  digitalWrite(g_tower_R, LOW);
-  digitalWrite(g_tower_G, LOW);
-  digitalWrite(g_tower_B, LOW);
-
-  delay(1200);
-  digitalWrite(g_beacon_R, HIGH);
-  digitalWrite(g_beacon_G, HIGH);
-  digitalWrite(g_beacon_B, HIGH);
-
-  
-  delay(400);
-
+  /*
   rwy_intensity_index++;
   if(rwy_intensity_index >= 4){
       rwy_intensity_index = 0;
   }
+  */
 }

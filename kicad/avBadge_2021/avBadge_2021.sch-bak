@@ -118,7 +118,7 @@ U 1 1 607BA1C2
 P 8300 5000
 F 0 "Q1" H 8490 5046 50  0000 L CNN
 F 1 "2N3904" H 8490 4955 50  0000 L CNN
-F 2 "TO_SOT_Packages_SMD:SOT-23" H 8500 4925 50  0001 L CIN
+F 2 "aerospace_badge:SOT-23-NPN" H 8500 4925 50  0001 L CIN
 F 3 "https://www.fairchildsemi.com/datasheets/2N/2N3904.pdf" H 8300 5000 50  0001 L CNN
 	1    8300 5000
 	1    0    0    -1  
