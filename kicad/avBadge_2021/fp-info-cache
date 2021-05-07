@@ -1,4 +1,4 @@
-1711719166350126
+1711719392890126
 Battery
 BatteryHolder_Bulgin_BX0036_1xC
 Bulgin Battery Holder, BX0036, Battery Type C (https://www.bulgin.com/products/pub/media/bulgin/data/Battery_holders.pdf)
@@ -4172,6 +4172,13 @@ SOT-23
 3
 3
 aerospace_badge
+artboard
+Converted using: svg2mod -i artboard.svg -o artboard
+svg2mod
+0
+5
+4
+aerospace_badge
 attiny84
 
 
@@ -4199,13 +4206,6 @@ switch_JS202011SCQN
 0
 6
 6
-aerospace_badge
-test
-Converted using: svg2mod -i 'Artboard 12.svg' -o test
-svg2mod
-0
-0
-0
 digikey-footprints
 3-SIP_Module_TM1000Q
 
