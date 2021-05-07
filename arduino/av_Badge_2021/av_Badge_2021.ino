@@ -16,8 +16,8 @@
 static unsigned long last_interrupt_time = 0;
 volatile short button_press_count = 0;
 
-short rwy_intensity[] = {0, 1, 50, 200};
-volatile short rwy_intensity_index = 2;
+short rwy_intensity[] = {0, 20, 50, 200};
+volatile short rwy_intensity_index = 1;
 
 const int rwy_edge_lights_ON_TIME = 40;
 const int rwy_edge_lights_OFF_TIME = 1800;
@@ -35,11 +35,13 @@ const int tower_gun_OFF_TIME = 400;
 boolean tower_gun_ON_STATE = true;
 unsigned long previousMillis_tower_gun = 0;
 boolean tower_gun_is_green = true;   // false is then percieced as RED for exercise extreme caution
-boolean tower_light_gun_is_ON = false;
+boolean tower_light_gun_is_ON = true;
 
 
 void setup() {
 
+  Serial.begin(9600);
+  Serial.println("Hello and welcome to the Aerospace Village Airport (KASV)");
   
   pinMode(g_beacon_R, OUTPUT);
   pinMode(g_beacon_G, OUTPUT);
@@ -53,7 +55,8 @@ void setup() {
   pinMode(g_rwy, OUTPUT);
   
   pinMode(g_button, INPUT);
-  attachInterrupt(digitalPinToInterrupt(g_button), button_press, CHANGE);
+  //digitalWrite(g_button, LOW);
+  //attachInterrupt(digitalPinToInterrupt(g_button), button_press, CHANGE);
   
 
 }
@@ -190,10 +193,17 @@ void loop() {
   beaconLight();
   towerLightGun();
 
-  /*
-  rwy_intensity_index++;
-  if(rwy_intensity_index >= 4){
-      rwy_intensity_index = 0;
+  int incomingByte = 0; // for incoming serial data
+
+  // reply only when you receive data:
+  if (Serial.available() > 0) {
+    // read the incoming byte:
+    incomingByte = Serial.read();
+
+    // say what you got:
+    Serial.print("I received: ");
+    Serial.println(incomingByte, DEC);
   }
-  */
+
+  
 }

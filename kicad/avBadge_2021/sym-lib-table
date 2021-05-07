@@ -1,0 +1,4 @@
+(sym_lib_table
+  (lib (name LED)(type Legacy)(uri /home/dan/Documents/Personal/aerospace/avBadge_2021/kicad/libraries/LED.lib)(options "")(descr ""))
+  (lib (name avBadge_symbols)(type Legacy)(uri /home/dan/Documents/Personal/aerospace/avBadge_2021/kicad/libraries/avBadge_symbols.lib)(options "")(descr ""))
+)
