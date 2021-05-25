@@ -107,7 +107,7 @@ U 1 1 607C2959
 P 1300 7100
 F 0 "BT1" H 1418 7196 50  0000 L CNN
 F 1 "Battery_Cell" H 1418 7105 50  0000 L CNN
-F 2 "aerospace_badge:BHX2-2032" V 1300 7160 50  0001 C CNN
+F 2 "2479_battery_holder:2479" V 1300 7160 50  0001 C CNN
 F 3 "~" V 1300 7160 50  0001 C CNN
 	1    1300 7100
 	1    0    0    -1  
@@ -250,17 +250,6 @@ F 3 "~" H 8200 5350 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L Device:LED D9
-U 1 1 6083040A
-P 8550 5350
-F 0 "D9" H 8543 5567 50  0000 C CNN
-F 1 "LED" H 8543 5476 50  0000 C CNN
-F 2 "sunled:XZDGK45WT-9" H 8550 5350 50  0001 C CNN
-F 3 "~" H 8550 5350 50  0001 C CNN
-	1    8550 5350
-	0    -1   -1   0   
-$EndComp
-$Comp
 L Device:LED D10
 U 1 1 60830675
 P 8900 5350
@@ -283,17 +272,6 @@ F 3 "~" H 8200 5800 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:R R17
-U 1 1 60830B93
-P 8550 5800
-F 0 "R17" H 8620 5846 50  0000 L CNN
-F 1 "330" H 8620 5755 50  0000 L CNN
-F 2 "Resistors_SMD:R_1206_3216Metric" V 8480 5800 50  0001 C CNN
-F 3 "~" H 8550 5800 50  0001 C CNN
-	1    8550 5800
-	1    0    0    -1  
-$EndComp
-$Comp
 L Device:R R18
 U 1 1 60830D91
 P 8900 5800
@@ -312,12 +290,7 @@ Connection ~ 7450 5200
 Wire Wire Line
 	7850 5200 8200 5200
 Connection ~ 7850 5200
-Wire Wire Line
-	8200 5200 8550 5200
 Connection ~ 8200 5200
-Wire Wire Line
-	8550 5200 8900 5200
-Connection ~ 8550 5200
 Wire Wire Line
 	7450 5500 7450 5650
 Wire Wire Line
@@ -325,18 +298,11 @@ Wire Wire Line
 Wire Wire Line
 	8200 5500 8200 5650
 Wire Wire Line
-	8550 5500 8550 5650
-Wire Wire Line
 	8900 5500 8900 5650
 Wire Wire Line
 	7850 5950 8200 5950
 Connection ~ 7850 5950
-Wire Wire Line
-	8200 5950 8550 5950
 Connection ~ 8200 5950
-Wire Wire Line
-	8550 5950 8900 5950
-Connection ~ 8550 5950
 Wire Wire Line
 	8200 6050 8200 5950
 $Comp
@@ -412,13 +378,13 @@ Runway Lighting (Red, Green, Yellow)
 $Comp
 L power:VCC #PWR018
 U 1 1 6085AA8F
-P 2250 5700
-F 0 "#PWR018" H 2250 5550 50  0001 C CNN
-F 1 "VCC" H 2265 5873 50  0000 C CNN
-F 2 "" H 2250 5700 50  0001 C CNN
-F 3 "" H 2250 5700 50  0001 C CNN
-	1    2250 5700
-	0    1    1    0   
+P 1200 6300
+F 0 "#PWR018" H 1200 6150 50  0001 C CNN
+F 1 "VCC" H 1215 6473 50  0000 C CNN
+F 2 "" H 1200 6300 50  0001 C CNN
+F 3 "" H 1200 6300 50  0001 C CNN
+	1    1200 6300
+	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R9
@@ -553,52 +519,6 @@ F 3 "http://www.kingbrightusa.com/images/catalog/SPEC/APFA3010LSEEZGKQBKC.pdf" H
 	1    7900 1650
 	1    0    0    -1  
 $EndComp
-$Comp
-L avBadge_symbols:TLV702 VR1
-U 1 1 609C2737
-P 1700 5800
-F 0 "VR1" H 1700 6125 50  0000 C CNN
-F 1 "TLV702" H 1700 6034 50  0000 C CNN
-F 2 "TO_SOT_Packages_SMD:SOT-23-5" H 1650 5800 50  0001 C CNN
-F 3 "" H 1650 5800 50  0001 C CNN
-	1    1700 5800
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	1200 6000 1400 6000
-Wire Wire Line
-	1200 6000 1200 6300
-Wire Wire Line
-	1200 6000 1200 5700
-Wire Wire Line
-	1200 5700 1400 5700
-Connection ~ 1200 6000
-$Comp
-L power:GND #PWR019
-U 1 1 609E0188
-P 1050 5850
-F 0 "#PWR019" H 1050 5600 50  0001 C CNN
-F 1 "GND" H 1050 5650 50  0000 C CNN
-F 2 "" H 1050 5850 50  0001 C CNN
-F 3 "" H 1050 5850 50  0001 C CNN
-	1    1050 5850
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	1050 5850 1400 5850
-$Comp
-L power:GND #PWR020
-U 1 1 609E3123
-P 2200 6000
-F 0 "#PWR020" H 2200 5750 50  0001 C CNN
-F 1 "GND" H 2200 5800 50  0000 C CNN
-F 2 "" H 2200 6000 50  0001 C CNN
-F 3 "" H 2200 6000 50  0001 C CNN
-	1    2200 6000
-	0    -1   -1   0   
-$EndComp
-Wire Wire Line
-	2000 6000 2200 6000
 $Comp
 L Device:R R12
 U 1 1 60A3BFDC
@@ -892,17 +812,6 @@ Wire Wire Line
 Wire Wire Line
 	4500 1850 4750 1850
 $Comp
-L avBadge_2021-rescue:SerialConnector-avBadge_symbols P1
-U 1 1 60B5934D
-P 3700 5500
-F 0 "P1" H 3928 5551 50  0000 L CNN
-F 1 "SerialConnector" H 3928 5460 50  0000 L CNN
-F 2 "aerospace_badge:serialConnector" H 3700 5500 50  0001 C CNN
-F 3 "" H 3700 5500 50  0001 C CNN
-	1    3700 5500
-	1    0    0    -1  
-$EndComp
-$Comp
 L power:GND #PWR017
 U 1 1 60B5A204
 P 3550 5600
@@ -991,8 +900,6 @@ Connection ~ 1300 6800
 Wire Wire Line
 	1300 6800 1300 6700
 Wire Wire Line
-	2000 5700 2250 5700
-Wire Wire Line
 	6350 2450 6350 5000
 $Comp
 L avBadge_symbols:OpenConnections S1
@@ -1017,13 +924,11 @@ Wire Wire Line
 	5250 3900 5300 3900
 Wire Wire Line
 	4350 4350 5250 4350
-Text Notes 7450 6200 0    50   ~ 10
-R
-Text Notes 7800 6200 0    50   ~ 10
-R
 Text Notes 8200 6400 0    50   ~ 10
+R
+Text Notes 7450 6400 0    50   ~ 10
 G
-Text Notes 8550 6400 0    50   ~ 10
+Text Notes 7800 6400 0    50   ~ 10
 G
 Text Notes 8900 6400 0    50   ~ 10
 Y
@@ -1031,4 +936,19 @@ Text Notes 9250 6400 0    50   ~ 10
 Y
 Text Notes 9550 6400 0    50   ~ 10
 Y
+Wire Wire Line
+	8200 5200 8900 5200
+Wire Wire Line
+	8200 5950 8900 5950
+$Comp
+L avBadge_symbols:SerialConnector P1
+U 1 1 60ADF153
+P 3700 5500
+F 0 "P1" H 3928 5551 50  0000 L CNN
+F 1 "SerialConnector" H 3928 5460 50  0000 L CNN
+F 2 "aerospace_badge:serialConnector" H 3700 5500 50  0001 C CNN
+F 3 "" H 3700 5500 50  0001 C CNN
+	1    3700 5500
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC

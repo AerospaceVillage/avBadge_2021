@@ -1,17 +1,21 @@
 
 #include "Arduino.h"
 
-#define g_beacon_R 8
-#define g_beacon_G 6  // schematic is wrong on these
-#define g_beacon_B 7
+#define g_beacon_R 14
+#define g_beacon_G 16
+#define g_beacon_B 15
 
-#define g_tower_R 9
-#define g_tower_G 1 // physical 2   schematic is wrong on these
-#define g_tower_B 0 // physical 3
+#define g_tower_R 5
+#define g_tower_G 9
+#define g_tower_B 6
 
-#define g_button 11
-#define g_rwy_flashing 2
-#define g_rwy 3
+#define g_button 3
+#define g_rwy_flashing 17 
+#define g_rwy 10
+
+#define g_UFO_LED 8
+#define g_UFO_input 2
+#define g_Trigger_Tower_Gun 3
 
 static unsigned long last_interrupt_time = 0;
 volatile short button_press_count = 0;
@@ -19,8 +23,8 @@ volatile short button_press_count = 0;
 short rwy_intensity[] = {0, 20, 50, 200};
 volatile short rwy_intensity_index = 1;
 
-const int rwy_edge_lights_ON_TIME = 40;
-const int rwy_edge_lights_OFF_TIME = 1800;
+const int rwy_edge_lights_ON_TIME = 5;
+const int rwy_edge_lights_OFF_TIME = 2000;
 boolean rwy_edge_lights_ON_STATE = true;
 unsigned long previousMillis_rwy_edge_lights = 0;
 
@@ -34,8 +38,12 @@ const int tower_gun_ON_TIME = 500;
 const int tower_gun_OFF_TIME = 400;
 boolean tower_gun_ON_STATE = true;
 unsigned long previousMillis_tower_gun = 0;
-boolean tower_gun_is_green = true;   // false is then percieced as RED for exercise extreme caution
-boolean tower_light_gun_is_ON = true;
+boolean tower_gun_is_green = false;   // false is then percieced as RED for exercise extreme caution
+boolean tower_light_gun_is_ON = false;
+
+boolean UFO_isOn = false;
+short UFO_count = 0;
+short UFO_count_limit = 5000;
 
 
 void setup() {
@@ -53,8 +61,16 @@ void setup() {
  
   pinMode(g_rwy_flashing, OUTPUT);  
   pinMode(g_rwy, OUTPUT);
+
+  pinMode(g_UFO_LED, OUTPUT);
+  digitalWrite(g_UFO_LED, HIGH);
+
+  pinMode(g_UFO_input, INPUT);
+
+  pinMode(g_Trigger_Tower_Gun, INPUT);
   
-  pinMode(g_button, INPUT);
+  
+  //pinMode(g_button, INPUT);
   //digitalWrite(g_button, LOW);
   //attachInterrupt(digitalPinToInterrupt(g_button), button_press, CHANGE);
   
@@ -204,6 +220,27 @@ void loop() {
     Serial.print("I received: ");
     Serial.println(incomingByte, DEC);
   }
+
+  if(digitalRead(g_UFO_input) == HIGH){
+    UFO_count += 1;
+    if(UFO_count >= UFO_count_limit){
+      UFO_isOn = !UFO_isOn;
+      UFO_count = 0;
+    }
+  }else{
+    UFO_count = 0;
+  }
+  
+  if(UFO_isOn == true){
+    digitalWrite(g_UFO_LED, HIGH);
+  }else{
+    digitalWrite(g_UFO_LED, LOW);
+  }
+
+  if(digitalRead(g_Trigger_Tower_Gun) == HIGH){
+    tower_light_gun_is_ON = !tower_light_gun_is_ON;
+  }
+
 
   
 }

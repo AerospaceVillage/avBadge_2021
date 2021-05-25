@@ -4,4 +4,5 @@
   (lib (name Battery)(type KiCad)(uri /home/dan/Documents/Programming/kicad_libraries/kicad-footprints/Battery.pretty)(options "")(descr ""))
   (lib (name aerospace_badge)(type KiCad)(uri /home/dan/Documents/Personal/aerospace/avBadge_2021/kicad/libraries/aerospace_badge.pretty)(options "")(descr ""))
   (lib (name Connector)(type KiCad)(uri /home/dan/Documents/Personal/aerospace/avBadge_2021/kicad/libraries/Connector)(options "")(descr ""))
+  (lib (name 2479_battery_holder)(type KiCad)(uri /home/dan/Documents/Personal/aerospace/avBadge_2021/kicad/libraries/2479_battery_holder.pretty)(options "")(descr ""))
 )
