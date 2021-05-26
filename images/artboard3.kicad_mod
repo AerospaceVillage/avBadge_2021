@@ -1,0 +1,10 @@
+(module svg2mod (layer F.Cu) (tedit 60AEB223)
+  (attr virtual)
+  (descr "Converted using: svg2mod -i hackerboard_onepath.svg -o artboard3")
+  (tags svg2mod)
+  (fp_text reference svg2mod (at 0 -99529296065.78238) (layer F.SilkS) hide
+    (effects (font (size 1.524 1.524) (thickness 0.3048)))
+  )
+  (fp_text value G*** (at 0 81460369351.89296) (layer F.SilkS) hide
+    (effects (font (size 1.524 1.524) (thickness 0.3048)))
+  )

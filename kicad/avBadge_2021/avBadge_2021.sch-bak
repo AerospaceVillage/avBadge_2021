@@ -451,8 +451,6 @@ F 3 "~" H 6850 5800 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	7100 4650 7100 4750
-Wire Wire Line
 	6850 5950 7450 5950
 Connection ~ 7450 5950
 Wire Wire Line
@@ -461,7 +459,6 @@ Wire Wire Line
 	6850 5650 6850 4750
 Wire Wire Line
 	6850 4750 7100 4750
-Connection ~ 7100 4750
 Wire Wire Line
 	7100 4750 7100 4800
 $Comp
@@ -741,7 +738,7 @@ U 1 1 60B23999
 P 10150 3500
 F 0 "D4" H 10143 3717 50  0000 C CNN
 F 1 "LED" H 10143 3626 50  0000 C CNN
-F 2 "sunled:XZDGK45WT-9" H 10150 3500 50  0001 C CNN
+F 2 "sunled:XZFBB45S-9" H 10150 3500 50  0001 C CNN
 F 3 "~" H 10150 3500 50  0001 C CNN
 	1    10150 3500
 	0    -1   -1   0   
@@ -811,17 +808,6 @@ Wire Wire Line
 	4500 3150 4500 1850
 Wire Wire Line
 	4500 1850 4750 1850
-$Comp
-L avBadge_2021-rescue:SerialConnector-avBadge_symbols P1
-U 1 1 60B5934D
-P 3700 5500
-F 0 "P1" H 3928 5551 50  0000 L CNN
-F 1 "SerialConnector-avBadge_symbols" H 3928 5460 50  0000 L CNN
-F 2 "aerospace_badge:serialConnector" H 3700 5500 50  0001 C CNN
-F 3 "" H 3700 5500 50  0001 C CNN
-	1    3700 5500
-	1    0    0    -1  
-$EndComp
 $Comp
 L power:GND #PWR017
 U 1 1 60B5A204
@@ -951,4 +937,18 @@ Wire Wire Line
 	8200 5200 8900 5200
 Wire Wire Line
 	8200 5950 8900 5950
+$Comp
+L avBadge_symbols:SerialConnector P1
+U 1 1 60ADF153
+P 3700 5500
+F 0 "P1" H 3928 5551 50  0000 L CNN
+F 1 "SerialConnector" H 3928 5460 50  0000 L CNN
+F 2 "aerospace_badge:serialConnector" H 3700 5500 50  0001 C CNN
+F 3 "" H 3700 5500 50  0001 C CNN
+	1    3700 5500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7100 4750 7100 4650
+Connection ~ 7100 4750
 $EndSCHEMATC

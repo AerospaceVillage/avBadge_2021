@@ -451,8 +451,6 @@ F 3 "~" H 6850 5800 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	7100 4650 7100 4750
-Wire Wire Line
 	6850 5950 7450 5950
 Connection ~ 7450 5950
 Wire Wire Line
@@ -461,7 +459,6 @@ Wire Wire Line
 	6850 5650 6850 4750
 Wire Wire Line
 	6850 4750 7100 4750
-Connection ~ 7100 4750
 Wire Wire Line
 	7100 4750 7100 4800
 $Comp
@@ -741,7 +738,7 @@ U 1 1 60B23999
 P 10150 3500
 F 0 "D4" H 10143 3717 50  0000 C CNN
 F 1 "LED" H 10143 3626 50  0000 C CNN
-F 2 "sunled:XZDGK45WT-9" H 10150 3500 50  0001 C CNN
+F 2 "sunled:XZFBB45S-9" H 10150 3500 50  0001 C CNN
 F 3 "~" H 10150 3500 50  0001 C CNN
 	1    10150 3500
 	0    -1   -1   0   
@@ -907,7 +904,7 @@ U 1 1 60C26AEC
 P 5550 3700
 F 0 "S1" H 5625 3925 50  0000 C CNN
 F 1 "OpenConnections" H 5625 3834 50  0000 C CNN
-F 2 "aerospace_badge:artboard" H 5550 3700 50  0001 C CNN
+F 2 "aerospace_badge:artboard2" H 5550 3700 50  0001 C CNN
 F 3 "" H 5550 3700 50  0001 C CNN
 	1    5550 3700
 	1    0    0    -1  
@@ -951,4 +948,7 @@ F 3 "" H 3700 5500 50  0001 C CNN
 	1    3700 5500
 	1    0    0    -1  
 $EndComp
+Wire Wire Line
+	7100 4750 7100 4650
+Connection ~ 7100 4750
 $EndSCHEMATC
