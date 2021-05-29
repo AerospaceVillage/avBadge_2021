@@ -754,7 +754,7 @@ F 3 "" H 10150 4100 50  0001 C CNN
 	1    10150 4100
 	1    0    0    -1  
 $EndComp
-Text Notes 9800 3850 0    50   ~ 10
+Text Notes 9850 3300 0    50   ~ 10
 UFO
 Wire Wire Line
 	3000 4150 3550 4150
@@ -904,7 +904,7 @@ U 1 1 60C26AEC
 P 5550 3700
 F 0 "S1" H 5625 3925 50  0000 C CNN
 F 1 "OpenConnections" H 5625 3834 50  0000 C CNN
-F 2 "aerospace_badge:artboard" H 5550 3700 50  0001 C CNN
+F 2 "aerospace_badge:artboard2" H 5550 3700 50  0001 C CNN
 F 3 "" H 5550 3700 50  0001 C CNN
 	1    5550 3700
 	1    0    0    -1  
@@ -951,4 +951,42 @@ $EndComp
 Wire Wire Line
 	7100 4750 7100 4650
 Connection ~ 7100 4750
+$Comp
+L Device:LED D9
+U 1 1 60B1DCE4
+P 9700 3500
+F 0 "D9" H 9693 3717 50  0000 C CNN
+F 1 "LED" H 9693 3626 50  0000 C CNN
+F 2 "sunled:XZFBB45S-9" H 9700 3500 50  0001 C CNN
+F 3 "~" H 9700 3500 50  0001 C CNN
+	1    9700 3500
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R R17
+U 1 1 60B1E1BD
+P 9700 3950
+F 0 "R17" H 9770 3996 50  0000 L CNN
+F 1 "330" H 9770 3905 50  0000 L CNN
+F 2 "Resistors_SMD:R_1206_3216Metric" V 9630 3950 50  0001 C CNN
+F 3 "~" H 9700 3950 50  0001 C CNN
+	1    9700 3950
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR011
+U 1 1 60B1E737
+P 9700 4100
+F 0 "#PWR011" H 9700 3850 50  0001 C CNN
+F 1 "GND" H 9705 3927 50  0000 C CNN
+F 2 "" H 9700 4100 50  0001 C CNN
+F 3 "" H 9700 4100 50  0001 C CNN
+	1    9700 4100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9700 3650 9700 3800
+Wire Wire Line
+	9700 3350 10150 3350
+Connection ~ 10150 3350
 $EndSCHEMATC

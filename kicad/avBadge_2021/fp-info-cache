@@ -1,4 +1,4 @@
-1718248897114931
+1719871259892931
 2479_battery_holder
 2479
 
@@ -4188,6 +4188,13 @@ svg2mod
 aerospace_badge
 artboard2
 Converted using: svg2mod -i artboard_smooth.svg -o artboard_smooth -p 2
+svg2mod
+0
+0
+0
+aerospace_badge
+artboard_smooth2
+Converted using: svg2mod -i artboard_smooth.svg -o artboard_smooth2 -p 1
 svg2mod
 0
 5
