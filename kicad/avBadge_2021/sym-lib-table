@@ -2,4 +2,5 @@
   (lib (name LED)(type Legacy)(uri /home/dan/Documents/Personal/aerospace/avBadge_2021/kicad/libraries/LED.lib)(options "")(descr ""))
   (lib (name avBadge_symbols)(type Legacy)(uri /home/dan/Documents/Personal/aerospace/avBadge_2021/kicad/libraries/avBadge_symbols.lib)(options "")(descr ""))
   (lib (name avBadge_2021-rescue)(type Legacy)(uri ${KIPRJMOD}/avBadge_2021-rescue.lib)(options "")(descr ""))
+  (lib (name sao1_69)(type Legacy)(uri /home/dan/Documents/Personal/aerospace/space_shuttle_SAO/space_shuttle_SAO/sao1_69.lib)(options "")(descr ""))
 )

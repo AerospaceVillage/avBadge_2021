@@ -1,4 +1,4 @@
-1719871259892931
+1726424369580649
 2479_battery_holder
 2479
 
@@ -4228,12 +4228,19 @@ serialConnector
 3
 3
 aerospace_badge
+space_shuttle_proper
+Converted using: svg2mod -i space_shuttle_proper.svg -o space_shuttle_proper -p 1
+svg2mod
+0
+0
+0
+aerospace_badge
 switch_JS202011SCQN
 
 
 0
 6
-6
+3
 digikey-footprints
 3-SIP_Module_TM1000Q
 
@@ -7482,6 +7489,27 @@ Zigbee_Module_MRF24J40MD
 0
 12
 12
+space_shuttle_SAO
+QRC
+
+
+0
+0
+0
+space_shuttle_SAO
+sao_1.69
+
+
+0
+6
+6
+space_shuttle_SAO
+space_shuttle_proper
+Converted using: svg2mod -i space_shuttle_proper.svg -o space_shuttle_proper -p 1
+svg2mod
+0
+0
+0
 sunled
 XZDGK45WT-9
 
