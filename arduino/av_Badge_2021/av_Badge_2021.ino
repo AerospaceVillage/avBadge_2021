@@ -1,6 +1,8 @@
 
 #include "Arduino.h"
+#include <EEPROM.h>
 
+// Pin mappings
 #define g_beacon_R 14
 #define g_beacon_G 16
 #define g_beacon_B 15
@@ -19,13 +21,11 @@
 #define g_LOST_COMMS_INPUT 3
 #define g_PCL_INPUT 2
 
-static unsigned long last_interrupt_time = 0;
-volatile short button_press_count = 0;
 
 short rwy_intensity[] = {0, 20, 50, 200};
-volatile short rwy_intensity_index = 1;
+short rwy_intensity_index = 1;
 short rwy_intensity_count = 0;
-short rwy_intensity_limit = 1000; // How long the user has hold the circuit closed for it to trigger ON (clock cyles)
+short rwy_intensity_limit = 2000; // How long the user has hold the circuit closed for it to trigger ON (clock cyles)
 
 const int rwy_edge_lights_ON_TIME = 5;
 const int rwy_edge_lights_OFF_TIME = 2000;
@@ -48,16 +48,77 @@ short lost_comms_count = 0;
 short lost_comms_limit = 10000;
 
 
-boolean UFO_isOn = true;
+boolean UFO_isOn = false;
 short UFO_count = 0;
-short UFO_count_limit = 10000; // How long the user has hold the circuit closed for it to trigger ON (clock cyles)
+short UFO_count_limit = 20000; // How long the user has hold the circuit closed for it to trigger ON (clock cyles)
+
+//EEPROM addresses for persistant state across power cycles.
+#define initial_setup 0
+#define UFO_boolean_address 1
+
+void serial_clear(){
+  for(int i=0; i<100; i++){
+    Serial.println("");
+  }
+}
+
+void serial_menu_display(short menu_index){
+
+  serial_clear();
+  switch (menu_index) {
+    case 1:
+      Serial.println(F("Airport Information\n"));
+      Serial.println(F("KASV\nAirport use:   Open to the public\nElevation: 203 ft\nTime Zone: UTC -7 (UTC -8 during Standard Time)"));
+      Serial.println(F("RWY: 29/11\nATIS: 125.85\nGND: 121.9\nTWR: 119.35\nDEFCON Approach: 120.45"));
+      Serial.println(F("\nEnter 0 to return to main menu"));      
+      break;
+      
+    case 2:
+      Serial.println(F("Aerospace Village Information\n"));
+      Serial.println(F("Build, inspire, and promote an inclusive community of next-generation aerospace cybersecurity expertise and leaders."));
+      Serial.println(F("To learn more about the community, be sure to check out:\naerospacevillage.org"));
+      Serial.println(F("\nEnter 0 to return to main menu"));
+      break;
+
+    case 3:
+      Serial.println(F("Current PIREPS\n"));
+      Serial.println(F("05 AUG 2021 0430Z: Pilot reported an \"unidentified flying object\" in the distance while on short final to RWY29.\n"));
+      Serial.println(F("05 AUG 2021 0435Z: Police reports of strange blue lights to the WNW of the airfield.\n"));
+      Serial.println(F("To report a PIREP please send an email to pirep@aerospacevillage.org with the subject line: \"KASV PIREP\""));
+      Serial.println(F("Do you believe in aliens?"));
+      Serial.println(F("\nEnter 0 to return to main menu"));
+      break;
+
+    case 4:
+      Serial.println(F("About the Badge\n"));
+      Serial.println(F("Designed by @cybertestpilot, github.com/daneallen/avBadge_2021"));
+      Serial.println(F("Artwork by Dan Ropp - flysurreal.com\n"));
+      Serial.println(F("Have you connected the MFDs in varying combinations?"));
+      Serial.println(F("Do you know what \"Lost Comms\" would look like from the control tower?"));
+      Serial.println(F("Are you familiar with Pilot Controlled Lighting?"));
+      Serial.println(F("Let us know what you think of the Badge!"));
+      Serial.println(F("\nEnter 0 to return to main menu"));
+      break;
 
 
+    case 0:
+    default:
+      
+      Serial.println(F("Welcome to the Aerospace Village Airport (KASV)"));
+      Serial.println(F("Select from an available option to learn more:"));
+      Serial.println(F("\t1. Airport Information"));
+      Serial.println(F("\t2. Aerospace Village Information"));
+      Serial.println(F("\t3. View current PIREPS"));
+      Serial.println(F("\t4. About the Badge"));
+      Serial.println(F("\n\nEnter the desired menu number and press enter"));
+      break;      
+  }  
+}
 
 void setup() {
 
   Serial.begin(9600);
-  Serial.println("Hello and welcome to the Aerospace Village Airport (KASV)");
+  serial_menu_display(0);
   
   pinMode(g_beacon_R, OUTPUT);
   pinMode(g_beacon_G, OUTPUT);
@@ -71,7 +132,19 @@ void setup() {
   pinMode(g_rwy, OUTPUT);
 
   pinMode(g_UFO_LED, OUTPUT);
-  digitalWrite(g_UFO_LED, HIGH);
+
+  //EEPROM.write(initial_setup, 0);
+  
+  if(EEPROM.read(initial_setup) == 0){
+    digitalWrite(g_UFO_LED, HIGH);    
+    EEPROM.write(initial_setup, 1); //only do this once to help with manufacturing so as to op check functionality
+    delay(5000);
+    
+  }else{
+    UFO_isOn = EEPROM.read(UFO_boolean_address);
+    tower_light_gun_is_ON = UFO_isOn; //make the tower light gun match what the UFO is doing to "proceed with caution"
+    digitalWrite(g_UFO_LED, UFO_isOn);
+  }
 
   // User input on the artwork.
   pinMode(g_UFO_INPUT, INPUT);
@@ -193,7 +266,9 @@ void maintain_UFO(){
     UFO_count += 1;
     if(UFO_count >= UFO_count_limit){
       UFO_isOn = !UFO_isOn;
+      EEPROM.write(UFO_boolean_address, byte(UFO_isOn));  //Write the state to memory for persistance
       UFO_count = 0;
+      tower_light_gun_is_ON = UFO_isOn; //make the tower light gun match what the UFO is doing to "proceed with caution"
     }
   }else{
     UFO_count = 0;
@@ -249,15 +324,13 @@ void loop() {
 
   // Service Serial input/output
 
-  int incomingByte = 0; // for incoming serial data
+  int user_selection = 0; // for incoming serial data
 
   // reply only when you receive data:
   if (Serial.available() > 0) {
     // read the incoming byte:
-    incomingByte = Serial.read();
+    user_selection = (short)Serial.parseInt();
+    serial_menu_display(user_selection);
 
-    // say what you got:
-    Serial.print("I received: ");
-    Serial.println(incomingByte, DEC);
   }  
 }

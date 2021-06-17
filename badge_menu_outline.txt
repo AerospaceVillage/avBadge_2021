@@ -1,0 +1,57 @@
+# Menu Root level [0]
+
+Welcome to the Aerospace Village Airport (KASV)
+Select from an available option to learn more:
+  1. Airport Information
+  2. Aerospace Village Information
+  3. View current PIREPS
+  4. About the Badge
+
+----------------------------------------------------------------
+
+# Airport Information [1]
+KASV
+Airport use: 	Open to the public
+Elevation: 203 ft
+Time Zone: UTC -7 (UTC -8 during Standard Time)
+RWY: 29/11
+ATIS: 125.85
+GND: 121.9
+TWR: 119.35
+DEFCON Approach: 120.45
+
+Enter 0 to return to main menu
+----------------------------------------------------------------
+
+# Aerospace Village Information [2]
+Build, inspire, and promote an inclusive community of next-generation aerospace cybersecurity expertise and leaders.
+
+To learn more about the community, be sure to check out:
+aerospacevillage.org
+
+Enter 0 to return to main menu
+----------------------------------------------------------------
+
+# Current PIREPS [3]
+
+05 AUG 2021 0430Z: Pilot reported an "unidentified flying object" in the distance while on short final to RWY29.
+05 AUG 2021 0435Z: Police reports of strange blue lights to the WNW of the airfield.
+
+To report a PIREP please send an email to pirep@aerospacevillage.org with the subject line: "KASV PIREP"
+Do you believe in aliens?
+
+Enter 0 to return to main menu
+----------------------------------------------------------------
+
+# About the Badge
+Designed by @cybertestpilot, github.com/daneallen/avBadge_2021
+Artwork by Dan Ropp - flysurreal.com
+
+Have you connected the MFDs in varying combinations?
+Do you know what "Lost Comms" would look like from the control tower?
+Are you familiar with Pilot Controlled Lighting?
+
+Let us know what you think of the Badge!
+
+Enter 0 to return to the main menu
+----------------------------------------------------------------
