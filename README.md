@@ -4,6 +4,8 @@ This repository is to document and capture all of the engineering and design wor
 
 We hope you enjoy all of the ways to interact with this years badge and learn about Aerospace along the way!
 
+<img src="/Images/badge.gif" width="300" />
+
 
 ## Kit Assembly
 
