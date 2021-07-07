@@ -2,11 +2,11 @@ Reference, Quantity, Value, Footprint
 BT1 ,1,Battery_Cell,2479_battery_holder:2479
 C1 C2 ,2,.1uF,Resistors_SMD:R_1206_3216Metric
 D1 D2 ,2,SunLED_RGB_ReverseMount,sunled:XZMDKCBDDG45S-9
-D10 D11 D12 ,3,LED,sunled:XZMYK45WT-9
-D4 D9 ,2,LED,sunled:XZFBB45S-9
-D3 D5 ,2,LED,aerospace_badge:led_in-s124ar
-D6 D7 ,2,LED,sunled:XZM2CRK45WT-9
-D8 ,1,LED,sunled:XZDGK45WT-9
+D10 D11 D12 ,3,Yellow LED,sunled:XZMYK45WT-9
+D4 D9 ,2,Blue LED,sunled:XZFBB45S-9
+D3 D5 ,2,White LED,aerospace_badge:led_in-s124ar
+D6 D7 ,2,Green LED,sunled:XZM2CRK45WT-9
+D8 ,1,Red LED,sunled:XZDGK45WT-9
 J1 ,1,AVR-ISP-6,aerospace_badge:AVR-ISP-6
 P1 ,1,SerialConnector,aerospace_badge:serialConnector
 Q1 ,1,2N3904,aerospace_badge:SOT-23-NPN

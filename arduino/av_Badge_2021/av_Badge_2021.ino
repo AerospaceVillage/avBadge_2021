@@ -58,7 +58,7 @@ short UFO_count_limit = 20000; // How long the user has hold the circuit closed 
 
 void serial_clear(){
   for(int i=0; i<100; i++){
-    Serial.println("");
+    Serial.print("\r\n");
   }
 }
 
@@ -67,37 +67,36 @@ void serial_menu_display(short menu_index){
   serial_clear();
   switch (menu_index) {
     case 1:
-      Serial.println(F("Airport Information\n"));
-      Serial.println(F("KASV\nAirport use:   Open to the public\nElevation: 203 ft\nTime Zone: UTC -7 (UTC -8 during Standard Time)"));
-      Serial.println(F("RWY: 29/11\nATIS: 125.85\nGND: 121.9\nTWR: 119.35\nDEFCON Approach: 120.45"));
-      Serial.println(F("\nEnter 0 to return to main menu"));      
+      Serial.println(F("Airport Information\r\n"));
+      Serial.println(F("KASV\r\nAirport use:   Open to the public\r\nElevation: 203 ft\r\nTime Zone: UTC -7 (UTC -8 during Standard Time)"));
+      Serial.println(F("RWY: 29/11\r\nATIS: 125.85\r\nGND: 121.9\r\nTWR: 119.35\r\nDEFCON Approach: 120.45"));
+      Serial.println(F("\nPress ENTER to return to main menu"));      
       break;
       
     case 2:
-      Serial.println(F("Aerospace Village Information\n"));
+      Serial.println(F("Aerospace Village Information\r\n"));
       Serial.println(F("Build, inspire, and promote an inclusive community of next-generation aerospace cybersecurity expertise and leaders."));
-      Serial.println(F("To learn more about the community, be sure to check out:\naerospacevillage.org"));
-      Serial.println(F("\nEnter 0 to return to main menu"));
+      Serial.println(F("To learn more about the community, be sure to check out: aerospacevillage.org"));
+      Serial.println(F("\nPress ENTER to return to main menu"));
       break;
 
     case 3:
-      Serial.println(F("Current PIREPS\n"));
-      Serial.println(F("05 AUG 2021 0430Z: Pilot reported an \"unidentified flying object\" in the distance while on short final to RWY29.\n"));
+      Serial.println(F("Current PIREPS\r\n"));
+      Serial.println(F("05 AUG 2021 0430Z: Pilot reported an \"unidentified flying object\" in the distance while on short final to RWY29."));
       Serial.println(F("05 AUG 2021 0435Z: Police reports of strange blue lights to the WNW of the airfield.\n"));
       Serial.println(F("To report a PIREP please send an email to pirep@aerospacevillage.org with the subject line: \"KASV PIREP\""));
-      Serial.println(F("Do you believe in aliens?"));
-      Serial.println(F("\nEnter 0 to return to main menu"));
+      Serial.println(F("\nPress ENTER to return to main menu"));
       break;
 
     case 4:
-      Serial.println(F("About the Badge\n"));
+      Serial.println(F("About the Badge\r\n"));
       Serial.println(F("Designed by @cybertestpilot, github.com/daneallen/avBadge_2021"));
       Serial.println(F("Artwork by Dan Ropp - flysurreal.com\n"));
       Serial.println(F("Have you connected the MFDs in varying combinations?"));
       Serial.println(F("Do you know what \"Lost Comms\" would look like from the control tower?"));
       Serial.println(F("Are you familiar with Pilot Controlled Lighting?"));
       Serial.println(F("Let us know what you think of the Badge!"));
-      Serial.println(F("\nEnter 0 to return to main menu"));
+      Serial.println(F("\nPress ENTER to return to main menu"));
       break;
 
 
@@ -110,7 +109,7 @@ void serial_menu_display(short menu_index){
       Serial.println(F("\t2. Aerospace Village Information"));
       Serial.println(F("\t3. View current PIREPS"));
       Serial.println(F("\t4. About the Badge"));
-      Serial.println(F("\n\nEnter the desired menu number and press enter"));
+      Serial.println(F("\n\nEnter the desired menu number"));
       break;      
   }  
 }
@@ -138,6 +137,7 @@ void setup() {
   if(EEPROM.read(initial_setup) == 0){
     digitalWrite(g_UFO_LED, HIGH);    
     EEPROM.write(initial_setup, 1); //only do this once to help with manufacturing so as to op check functionality
+    EEPROM.write(UFO_boolean_address, 0); //only do this once to help with manufacturing so as to op check functionality
     delay(5000);
     
   }else{
@@ -264,11 +264,28 @@ void towerLightGun()
 void maintain_UFO(){
   if(digitalRead(g_UFO_INPUT) == HIGH){
     UFO_count += 1;
+        
     if(UFO_count >= UFO_count_limit){
       UFO_isOn = !UFO_isOn;
       EEPROM.write(UFO_boolean_address, byte(UFO_isOn));  //Write the state to memory for persistance
       UFO_count = 0;
       tower_light_gun_is_ON = UFO_isOn; //make the tower light gun match what the UFO is doing to "proceed with caution"
+
+      serial_clear();
+      
+      Serial.println(F("\r\n\r\nDo you believe?\r\n\r\n"));
+      Serial.println(F("    .-\"\"\"\"-.        .-\"\"\"\"-."));
+      Serial.println(F("   /        \\      /        \\"));
+      Serial.println(F("  /_        _\\    /_        _\\"));
+      Serial.println(F(" // \\      / \\\\  // \\      / \\\\"));
+      Serial.println(F(" |\\__\\    /__/|  |\\__\\    /__/|"));
+      Serial.println(F("  \\    ||    /    \\    ||    /"));
+      Serial.println(F("   \\        /      \\        /"));
+      Serial.println(F("    \\  __  /        \\  __  /"));
+      Serial.println(F("     '.__.'          '.__.'"));
+      Serial.println(F("      |  |            |  |"));
+      Serial.println(F("      |  |            |  |"));
+      Serial.println(F("\r\n\r\nDo you believe?"));      
     }
   }else{
     UFO_count = 0;
@@ -330,6 +347,7 @@ void loop() {
   if (Serial.available() > 0) {
     // read the incoming byte:
     user_selection = (short)Serial.parseInt();
+    Serial.print(String(user_selection));
     serial_menu_display(user_selection);
 
   }  
