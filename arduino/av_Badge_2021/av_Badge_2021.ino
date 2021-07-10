@@ -139,6 +139,8 @@ void setup() {
     EEPROM.write(initial_setup, 1); //only do this once to help with manufacturing so as to op check functionality
     EEPROM.write(UFO_boolean_address, 0); //only do this once to help with manufacturing so as to op check functionality
     delay(5000);
+    digitalWrite(g_UFO_LED, LOW);
+    UFO_isOn = false;
     
   }else{
     UFO_isOn = EEPROM.read(UFO_boolean_address);
