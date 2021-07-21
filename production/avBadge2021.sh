@@ -8,11 +8,11 @@ read -s
 #sleep 3
 
 echo "Ensure the intial address EEPROM is set to 0"
-avrdude -Cavrdude.conf -v -patmega88p -cusbtiny -Uflash:w:/reset_badge.ino.with_bootloader.hex:i
+avrdude -Cavrdude.conf -v -patmega88p -cusbtiny -Uflash:w:reset_badge.ino.with_bootloader.hex:i
 
 read -s
 #sleep 2
 
 echo "Load the actual av_badge2021 code"
 
-avrdude -Cavrdude.conf -v -patmega88p -cusbtiny -Uflash:w:/av/tmp/arduino_build_206290_Badge_2021.ino.with_bootloader.hex:i
+avrdude -Cavrdude.conf -v -patmega88p -cusbtiny -Uflash:w:av_Badge_2021.ino.with_bootloader.hex:i
